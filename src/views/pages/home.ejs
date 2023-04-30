@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-Commerce</title>
+
+  <style>
+    .producto {
+      display: flex;
+      flex-direction: column;
+    }
+  </style>
+
+  <script>
+    async function addProductToUserCart(product) {
+      const response = await fetch('http://localhost:8080/home', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(product)
+      });
+
+      if (response.status) {
+        alert("Producto agregado al carrito");
+      } else {
+        alert("Error al añadir el producto");
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <header>
+    <h1>Bienvenido <%= userName %></h1>
+    <form action="http://localhost:8080/session/logout" method="GET">
+      <button type="submit">Cerrar sesión</button>
+    </form>
+    <form action="http://localhost:8080/home/cart" method="GET">
+      <button type="submit">Al carrito</button>
+    </form>
+  </header>
+
+  <main>
+    <% for(let product of products) { %>
+    <div class="producto">
+      <span><img src=<%= product.thumbnail %>></span>
+      <span><%= product.name %></span>
+      <span>Precio: <%= product.price %></span>
+      <button onclick="addProductToUserCart({name:'<%=product.name %>',price: '<%=product.price %>',thumbnail: '<%=product.thumbnail %>'})">Añadir al carrito</button>
+    </div>
+    <% } %>
+  </main>
+</body>
+
+</html>

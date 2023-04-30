@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Carrito</title>
+
+  <script>
+    async function deleteOneProduct(product) {
+      await fetch('http://localhost:8080/home/cart', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(product)
+      });
+      window.location.reload();
+    }
+
+    async function deleteAllProducts(action) {
+      await fetch('http://localhost:8080/home/cart', {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(action)
+      });
+      window.location.reload();
+    }
+  </script>
+</head>
+
+<body>
+  <% if(cart.length < 1) {%>
+  <h2>Carrito vacío</h2>
+  <% }else{ %>
+  <% for(let product of cart) {%>
+  <div>
+    <span>Nombre: <%= product.name %></span>
+    <span>Precio: <%= product.price %></span>
+    <button onclick="deleteOneProduct({name: '<%= product.name %>', allProducts: false})">Eliminar</button>
+  </div>
+  <% } %>
+  <form action="http://localhost:8080/home/cart/newPurchase" method="POST">
+    <button type="submit">Realizar pedido</button>
+  </form>
+  <button onclick="deleteAllProducts({allProducts: true})">Limpiar carrito</button>
+  <% } %>
+</body>
+
+</html>

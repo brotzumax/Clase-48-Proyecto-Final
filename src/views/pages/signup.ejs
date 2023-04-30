@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registrarse</title>
+</head>
+
+<body>
+  <h1>Nuevo registro</h1>
+  <form action="http://localhost:8080/session/signup" method="POST">
+    <div>
+      <label for="txtName">Nombre:</label>
+      <input type="text" name="txtName" id="txtName">
+    </div>
+    <div>
+      <label for="txtEmail">Email:</label>
+      <input type="email" name="txtEmail" id="txtEmail">
+    </div>
+    <div>
+      <label for="txtPassword">Contraseña:</label>
+      <input type="password" name="txtPassword" id="txtPassword">
+    </div>
+    <button type="submit">Registrarse</button>
+  </form>
+  <form action="http://localhost:8080/session/login" method="GET">
+    <div>
+      <label for="btnLogin">¿Ya tienes una cuenta?</label>
+      <button id="btnLogin" type="submit">Iniciar Sesión</button>
+    </div>
+  </form>
+
+  <% if (error) { %>
+  <script>
+    alert("Error al registrar el usuario");
+  </script>
+  <% } %>
+</body>
+
+</html>
