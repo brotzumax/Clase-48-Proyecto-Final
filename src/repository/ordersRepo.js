@@ -7,7 +7,9 @@ class OrdersRepo {
     }
 
     async add(newOrder) {
-        await this.dao.add(newOrder);
+        const createdOrder = await this.dao.add(newOrder);
+        createdOrder.id = createdOrder._id.toString();
+        return new OrderDto(createdOrder);
     }
 
     async getByOrderNumber(orderNumber) {

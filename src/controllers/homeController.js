@@ -2,6 +2,7 @@ import ProductsApi from "../services/productsApi.js";
 import UsersApi from "../services/usersApi.js";
 import OrdersApi from "../services/ordersApi.js";
 import calculateTotalPrice from "../services/pricesCalculator.js";
+import sendOrderToAdminMail from "../services/nodemailerOrders.js";
 
 async function getHome(req, res) {
     const products = await ProductsApi.getInstance().getAllProducts()
@@ -37,8 +38,9 @@ async function postNewPurchase(req, res) {
         date: `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()} - ${date.getHours()}:${date.getMinutes()}`,
         totalPrice: calculateTotalPrice(cart)
     }
-    await OrdersApi.getInstance().newOrder(newOrder);
+    const createdOrder = await OrdersApi.getInstance().newOrder(newOrder);
     await UsersApi.getInstance().clearUserCart(req.user.email);
+    await sendOrderToAdminMail(createdOrder);
     return res.redirect("/home");
 }
 

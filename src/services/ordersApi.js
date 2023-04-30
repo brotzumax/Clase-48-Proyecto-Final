@@ -15,7 +15,8 @@ class OrdersApi {
     }
 
     async newOrder(newOrder) {
-        await this.ordersRepo.add(newOrder);
+        const createdOrder = await this.ordersRepo.add(newOrder);
+        return createdOrder;
     }
 
     async getOrderByOrderNumber(orderNumber) {

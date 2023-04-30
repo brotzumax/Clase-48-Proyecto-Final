@@ -3,8 +3,9 @@ import Order from "../orderModel.js";
 class OrdersDaoMongoose {
     async add(newOrder) {
         try {
-            await Order.create(newOrder);
+            const order = await Order.create(newOrder);
             console.log("Orden guardada");
+            return order;
         } catch (error) {
             console.log("Error al guardar la nueva orden");
             console.log(error);

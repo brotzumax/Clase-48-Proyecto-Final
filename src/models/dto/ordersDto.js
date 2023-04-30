@@ -1,6 +1,6 @@
 class OrderDto {
-    constructor({ _id, clientEmail, products, date, totalPrice }) {
-        this.orderId = _id;
+    constructor({ id, clientEmail, products, date, totalPrice }) {
+        this.orderId = id;
         this.clientEmail = clientEmail;
         this.products = products;
         this.date = date;
