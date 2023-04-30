@@ -1,6 +1,6 @@
 import OrdersDaoMongoose from "../models/dao/ordersDaoMongoose.js"
 
-const opcion = process.argv[4] || 'MONGO';
+const opcion = process.argv[4] || process.env.PERSISTENCE_MODE;
 let instance = null;
 
 class OrdersDaoFactory {
