@@ -4,7 +4,6 @@ class OrdersDaoMongoose {
     async add(newOrder) {
         try {
             const order = await Order.create(newOrder);
-            console.log("Orden guardada");
             return order;
         } catch (error) {
             console.log("Error al guardar la nueva orden");

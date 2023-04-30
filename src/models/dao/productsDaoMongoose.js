@@ -4,7 +4,6 @@ class ProductsDaoMongoose {
     async add(newProduct) {
         try {
             await Product.create(newProduct);
-            console.log("Producto guardado");
         } catch (error) {
             console.log("Error al guardar el producto");
             console.log(error);
@@ -53,7 +52,6 @@ class ProductsDaoMongoose {
             if (!product) {
                 console.log("Producto no encontrado");
             } else {
-                console.log("Producto actualizado");
             }
         } catch (error) {
             console.log("Error al actualizar el producto");
@@ -66,8 +64,6 @@ class ProductsDaoMongoose {
             const product = await Product.findOneAndDelete({ name: productName });
             if (!product) {
                 console.log("Producto no encontrado");
-            } else {
-                console.log("Producto eliminado");
             }
         } catch (error) {
             console.log("Error al eliminar el producto");

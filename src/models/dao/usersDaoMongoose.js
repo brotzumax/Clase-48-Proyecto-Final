@@ -4,7 +4,6 @@ class UsersDaoMongoose {
     async add(newUser) {
         try {
             await User.create(newUser);
-            console.log("Usuario guardado");
         } catch (error) {
             console.log("Error al guardar el usuario");
             console.log(error);
@@ -42,7 +41,6 @@ class UsersDaoMongoose {
             const user = await User.findOne({ email: userEmail });
             user.cart.push(product);
             await user.save();
-            console.log("Producto añadido al carrito");
         } catch (error) {
             console.log("Error al añadir el producto al carrito");
             console.log(error);
@@ -56,7 +54,6 @@ class UsersDaoMongoose {
             if (productIndex > -1) {
                 user.cart.splice(productIndex, 1);
                 await user.save();
-                console.log("Producto eliminado del carrito");
             } else {
                 console.log("Producto no encontrado");
             }
@@ -71,7 +68,6 @@ class UsersDaoMongoose {
             const user = await User.findOne({ email: userEmail });
             user.cart = [];
             await user.save();
-            console.log("Carrito limpiado");
         } catch (error) {
             console.log("Error al limpiar el carrito");
             console.log(error);
